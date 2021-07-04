@@ -1,21 +1,29 @@
 import classes from "./Schedule.module.css";
-import MealOfTheDay from "./MealOfTheDay";
-import { plates } from "../../assets/Data";
-import Meals from "./Meals";
-
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+import { useEffect, useState } from "react";
+import firebase from "firebase";
 
 const Schedule = () => {
-  return (
-    <div className={classes.schedule}>
-      {/*{plates.map((plate) => (*/}
-      {/*  <MealOfTheDay days={plate.Day} img={plate.img} type={plate.Type} />*/}
-      {/*))}*/}
-      {days.map((day) => (
-        <MealOfTheDay days={day} />
-      ))}
-    </div>
-  );
+  const [order, setOrder] = useState([]);
+
+  //will render the order if user has one
+  // useEffect(() => {
+  //   db.collection("orders").onSnapshot((snapshot) => {
+  //     setOrder(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+  //   });
+  // }, []);
+
+  //TODO: send order request
+  // db.collection("orders").add({
+  //   orderOwner: "Ratz",
+  //   mondayChoice: "",
+  //   tuesdayChoice: "",
+  //   wednesdayChoice: "",
+  //   thursdayChoice: "",
+  //   fridayChoice: "",
+  //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  // });
+
+  return <div className={classes.schedule}>ORDER</div>;
 };
 
 export default Schedule;

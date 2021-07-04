@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  // const isLoggedIn = useSelector((state) => state.auth.user);
 
   return (
     <Layout>

@@ -3,22 +3,21 @@ import { useHistory } from "react-router-dom";
 import classes from "./AuthForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
+import { auth } from "../../firebase/firebase";
 
 const AuthForm = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   //const [hasError, setError] = useState();
 
   const history = useHistory();
-
   const dispatch = useDispatch();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   const switchAuthModeHandler = async () => {
-    console.log(isAuthenticated);
     setIsLogin((prevState) => !prevState);
   };
 
@@ -38,59 +37,20 @@ const AuthForm = () => {
 
     setIsLoading(true);
 
-    let url;
     if (isLogin) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCqaPjIXRvdeGWoG9b0xDiwen05gw2wqiY";
     } else {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCqaPjIXRvdeGWoG9b0xDiwen05gw2wqiY";
+      auth
+        .createUserWithEmailAndPassword(emailInput, passwordInput)
+        .then((userAuth) => {
+          dispatch(
+            authActions.login({
+              email: userAuth.user.email,
+              uid: userAuth.user.uid,
+            })
+          );
+        })
+        .catch((error) => alert(error.message));
     }
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: emailInput,
-        password: passwordInput,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        setIsLoading(false);
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.json().then((data) => {
-            //setError(data.error.message);
-            let errorMessage = "Authentication Failed";
-            // if (data && data.error && data.error.message) {
-            //   errorMessage = data.error.message;
-            // }
-
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        const expirationTime = new Date(
-          new Date().getTime() + +data.expiresIn * 1000
-        );
-
-        dispatch(authActions.login(data.idToken, expirationTime.toISOString()));
-
-        // setTimeout(() => {
-        //   dispatch(authActions.logout());
-        // }, 2000);
-
-        dispatch(authActions.setUser(emailInput));
-        localStorage.setItem("loggedUser", emailInput);
-        history.replace("/");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
   };
 
   return (
