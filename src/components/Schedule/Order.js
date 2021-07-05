@@ -1,8 +1,10 @@
 import React from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
+import { db } from "../../firebase/firebase";
 
 function Order(props) {
+  console.log(props.orderData.id);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;
@@ -52,11 +54,22 @@ function Order(props) {
       });
     });
 
+  const deleteOrderHandler = () => {
+    db.collection("orders")
+      .doc(props.orderData.id)
+      .delete()
+      .then(() => {})
+      .catch((error) => alert(error.message));
+  };
+
   return (
     <>
       <div className={classes.order}>{options}</div>
       <div>
         <p className={classes.total}>Your grand Total: {total}$</p>
+        <button onClick={deleteOrderHandler} className={classes.btn}>
+          Delete order!
+        </button>
       </div>
     </>
   );
