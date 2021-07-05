@@ -38,6 +38,17 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (isLogin) {
+      auth
+        .signInWithEmailAndPassword(emailInput, passwordInput)
+        .then((userAuth) => {
+          dispatch(
+            authActions.login({
+              email: userAuth.user.email,
+              uid: userAuth.user.uid,
+            })
+          );
+        })
+        .catch((error) => alert(error.message));
     } else {
       auth
         .createUserWithEmailAndPassword(emailInput, passwordInput)

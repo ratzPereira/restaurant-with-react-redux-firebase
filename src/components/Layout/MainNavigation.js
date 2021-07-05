@@ -4,6 +4,7 @@ import classes from "./MainNavigation.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import { useHistory } from "react-router-dom";
+import { auth } from "../../firebase/firebase";
 
 const MainNavigation = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const MainNavigation = () => {
     dispatch(authActions.logout());
     localStorage.removeItem("loggedUser");
     history.replace("/");
+    auth.signOut();
   };
 
   return (

@@ -54,7 +54,7 @@ const ProfileForm = () => {
   return (
     <form className={classes.form} onSubmit={changePasswordHandler}>
       <div className={classes.control}>
-        <label htmlFor="new-password">New Password for {user}</label>
+        <label htmlFor="new-password">New Password for {user.email}</label>
         <input
           type="password"
           id="new-password"

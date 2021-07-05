@@ -7,11 +7,33 @@ import AuthPage from "./pages/AuthPage";
 import MenuPage from "./pages/MenuPage";
 import AboutPage from "./pages/AboutPage";
 import SchedulePage from "./pages/SchedulePage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { auth } from "./firebase/firebase";
+import { authActions } from "./store/auth-slice";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  // const isLoggedIn = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        //user is logged in
+        dispatch(
+          authActions.login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+          })
+        );
+      } else {
+        //user is logged out
+        dispatch(authActions.logout());
+      }
+    });
+  }, [dispatch]);
 
   return (
     <Layout>
