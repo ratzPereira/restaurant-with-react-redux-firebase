@@ -45,6 +45,7 @@ const AuthForm = () => {
           );
         })
         .catch((error) => alert(error.message));
+      setIsLoading(false);
     } else {
       auth
         .createUserWithEmailAndPassword(emailInput, passwordInput)
@@ -57,6 +58,7 @@ const AuthForm = () => {
           );
         })
         .catch((error) => alert(error.message));
+      setIsLoading(false);
     }
   };
 
