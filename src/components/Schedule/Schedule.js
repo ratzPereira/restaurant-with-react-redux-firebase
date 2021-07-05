@@ -1,9 +1,9 @@
 import classes from "./Schedule.module.css";
-import { useEffect, useState } from "react";
-import firebase from "firebase";
+import { useState } from "react";
+import Card from "../UI/Card";
 
 const Schedule = () => {
-  const [order, setOrder] = useState([]);
+  // const [order, setOrder] = useState([]);
 
   //will render the order if user has one
   // useEffect(() => {
@@ -23,7 +23,62 @@ const Schedule = () => {
   //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
   // });
 
-  return <div className={classes.schedule}>ORDER</div>;
+  return (
+    <div className={classes.schedule}>
+      <h1>Schedule your meals</h1>
+      <div>
+        <Card className={classes.card}>
+          Monday:
+          <select>
+            <option defaultValue="None">None</option>
+            <option value="Meat">Meat</option>
+            <option value="Fish">Fish</option>
+          </select>
+        </Card>
+      </div>
+      <div>
+        <Card className={classes.card}>
+          Tuesday:
+          <select>
+            <option defaultValue="None">None</option>
+            <option value="Meat">Meat</option>
+            <option value="Fish">Fish</option>
+          </select>
+        </Card>
+      </div>
+      <div>
+        <Card className={classes.card}>
+          Wednesday:
+          <select>
+            <option defaultValue="None">None</option>
+            <option value="Meat">Meat</option>
+            <option value="Fish">Fish</option>
+          </select>
+        </Card>
+      </div>
+      <div>
+        <Card className={classes.card}>
+          Thursday:
+          <select>
+            <option defaultValue="None">None</option>
+            <option value="Meat">Meat</option>
+            <option value="Fish">Fish</option>
+          </select>
+        </Card>
+      </div>
+      <div>
+        <Card className={classes.card}>
+          Friday:
+          <select>
+            <option defaultValue="None">None</option>
+            <option value="Meat">Meat</option>
+            <option value="Fish">Fish</option>
+          </select>
+        </Card>
+      </div>
+      <button className={classes.myButton}>Order Now!</button>
+    </div>
+  );
 };
 
 export default Schedule;

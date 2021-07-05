@@ -1,9 +1,48 @@
 .schedule {
     margin: 3rem auto;
     text-align: center;
+
+    font-weight: bold;
+    font-size: x-large;
 }
 
 .schedule h1 {
     margin: 3rem auto;
     text-align: center;
+}
+
+.card {
+    padding: 30px;
+    margin-left: 9rem ;
+    margin-right: 9rem ;
+    margin-top: 10px;
+}
+
+.schedule select {
+    border: solid 3px black ;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 100%;
+    margin-left: 50px;
+}
+
+.myButton {
+    background-color:#44c767;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+    margin-top: 30px;
+}
+.myButton:hover {
+    background-color:#5cbf2a;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
 }

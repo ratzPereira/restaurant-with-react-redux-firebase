@@ -17,8 +17,8 @@ const MainNavigation = () => {
     event.preventDefault();
     dispatch(authActions.logout());
     localStorage.removeItem("loggedUser");
-    history.replace("/");
     auth.signOut();
+    history.replace("/");
   };
 
   return (

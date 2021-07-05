@@ -14,7 +14,6 @@ import { authActions } from "./store/auth-slice";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  // const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 
