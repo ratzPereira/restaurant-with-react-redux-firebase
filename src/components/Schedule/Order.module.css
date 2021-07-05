@@ -1,0 +1,25 @@
+.order{
+    text-align:center;
+    vertical-align:middle;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order img {
+    height: 150px;
+    background-size: cover;
+    margin-bottom: 5px;
+    border: #161616 solid 2px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.name {
+    color: white;
+    font-size:70%;
+}
+.total{
+    color: green;
+    font-weight: bold;
+}

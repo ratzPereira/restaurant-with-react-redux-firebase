@@ -86,18 +86,22 @@ const Schedule = () => {
     }) => {
       return {
         id,
-        mondayChoice,
-        tuesdayChoice,
-        wednesdayChoice,
-        thursdayChoice,
-        fridayChoice,
+        Monday: mondayChoice,
+        Tuesday: tuesdayChoice,
+        Wednesday: wednesdayChoice,
+        Thursday: thursdayChoice,
+        Friday: fridayChoice,
         orderOwner,
       };
     }
   );
-  const orderOwnerName = orderData.map(({ orderOwner }) => orderOwner);
-  const userHasOrderPlaced = userName.email == orderOwnerName;
-  console.log(order);
+
+  const orderOwnerName = orderData.find(
+    (orderOwner) => orderOwner.orderOwner == userName.email
+  );
+
+  console.log(orderOwnerName);
+
   return (
     <div className={classes.schedule}>
       <h1>Schedule your meals</h1>
@@ -151,12 +155,16 @@ const Schedule = () => {
           </select>
         </Card>
       </div>
-      {!userHasOrderPlaced && (
+      {!orderOwnerName && (
         <button onClick={submitOrderHandler} className={classes.myButton}>
           Order Now!
         </button>
       )}
-      <Order orderData={orderData} />
+      {!orderOwnerName ? (
+        <p>No Order Yet</p>
+      ) : (
+        <Order orderData={orderOwnerName} />
+      )}
     </div>
   );
 };
