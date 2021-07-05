@@ -10,7 +10,6 @@ import { authActions } from "../../store/auth-slice";
 const Schedule = () => {
   const [order, setOrder] = useState([]);
 
-  const userHasOrder = useSelector((state) => state.auth.hasOrder);
   const userName = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -45,7 +44,6 @@ const Schedule = () => {
     setFridayOption(e.target.value);
   };
 
-  console.log(userHasOrder);
   const submitOrderHandler = (e) => {
     e.preventDefault();
     console.log(
@@ -100,61 +98,64 @@ const Schedule = () => {
     (orderOwner) => orderOwner.orderOwner == userName.email
   );
 
-  console.log(orderOwnerName);
-
   return (
     <div className={classes.schedule}>
       <h1>Schedule your meals</h1>
-      <div>
-        <Card className={classes.card}>
-          Monday:
-          <select onChange={getMondayOption}>
-            <option defaultValue="None">None</option>
-            <option value="Meat">Meat</option>
-            <option value="Fish">Fish</option>
-          </select>
-        </Card>
-      </div>
-      <div>
-        <Card className={classes.card}>
-          Tuesday:
-          <select onChange={getTuesdayOption}>
-            <option defaultValue="None">None</option>
-            <option value="Meat">Meat</option>
-            <option value="Fish">Fish</option>
-          </select>
-        </Card>
-      </div>
-      <div>
-        <Card className={classes.card}>
-          Wednesday:
-          <select onChange={getWednesdayOption}>
-            <option defaultValue="None">None</option>
-            <option value="Meat">Meat</option>
-            <option value="Fish">Fish</option>
-          </select>
-        </Card>
-      </div>
-      <div>
-        <Card className={classes.card}>
-          Thursday:
-          <select onChange={getThursdayOption}>
-            <option defaultValue="None">None</option>
-            <option value="Meat">Meat</option>
-            <option value="Fish">Fish</option>
-          </select>
-        </Card>
-      </div>
-      <div>
-        <Card className={classes.card}>
-          Friday:
-          <select onChange={getFridayOption}>
-            <option defaultValue="None">None</option>
-            <option value="Meat">Meat</option>
-            <option value="Fish">Fish</option>
-          </select>
-        </Card>
-      </div>
+      {!orderOwnerName && (
+        <>
+          <div>
+            <Card className={classes.card}>
+              Monday:
+              <select onChange={getMondayOption}>
+                <option defaultValue="None">None</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </Card>
+          </div>
+          <div>
+            <Card className={classes.card}>
+              Tuesday:
+              <select onChange={getTuesdayOption}>
+                <option defaultValue="None">None</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </Card>
+          </div>
+          <div>
+            <Card className={classes.card}>
+              Wednesday:
+              <select onChange={getWednesdayOption}>
+                <option defaultValue="None">None</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </Card>
+          </div>
+          <div>
+            <Card className={classes.card}>
+              Thursday:
+              <select onChange={getThursdayOption}>
+                <option defaultValue="None">None</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </Card>
+          </div>
+          <div>
+            <Card className={classes.card}>
+              Friday:
+              <select onChange={getFridayOption}>
+                <option defaultValue="None">None</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </Card>
+          </div>
+        </>
+      )}
+
       {!orderOwnerName && (
         <button onClick={submitOrderHandler} className={classes.myButton}>
           Order Now!

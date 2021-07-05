@@ -9,7 +9,6 @@ const ProfileForm = () => {
   const newPasswordInput = useRef();
 
   const dispatch = useDispatch();
-  const userToken = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
 
   const history = useHistory();
@@ -31,35 +30,6 @@ const ProfileForm = () => {
         history.replace("/auth");
       })
       .catch((error) => alert(error.message));
-
-    //   fetch(
-    //     "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCqaPjIXRvdeGWoG9b0xDiwen05gw2wqiY",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({
-    //         idToken: userToken.payload,
-    //         password: newInputPassword,
-    //         returnSecureToken: true,
-    //       }),
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         return response.json().then(() => {
-    //           let errorMessage = "Could not change your password";
-    //           throw new Error(errorMessage);
-    //         });
-    //       }
-    //       const data = response.json();
-    //       console.log(data);
-    //       history.replace("/auth");
-    //     })
-    //     .catch((error) => {
-    //       alert(error.message);
-    //     });
   };
 
   return (

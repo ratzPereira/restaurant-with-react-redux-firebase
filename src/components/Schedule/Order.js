@@ -1,7 +1,6 @@
 import React from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
-import OrderPlate from "./OrderPlate";
 
 function Order(props) {
   const monday = props.orderData.Monday;
@@ -39,11 +38,11 @@ function Order(props) {
   choices
     .filter((choiceOpt) => choiceOpt.choice != "None")
     .find((choice) => {
-      plates.forEach((plate) => {
+      plates.forEach((plate, index) => {
         if (plate.Type === choice.choice && plate.Day === choice.weekday) {
           total += plate.Price;
           options.push(
-            <div>
+            <div key={index}>
               <p className={classes.name}>{plate.Name}</p>
               <img src={plate.img} alt={"thisisaoption"} />
               <p>Price: {plate.Price}$</p>
