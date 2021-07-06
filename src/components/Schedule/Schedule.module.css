@@ -1,29 +1,41 @@
 .schedule {
     margin: 3rem auto;
     text-align: center;
-
     font-weight: bold;
     font-size: x-large;
 }
 
-.schedule h1 {
-    margin: 3rem auto;
-    text-align: center;
+.schedule img {
+    height: 120px;
+    margin-left: 125px;
 }
 
+.schedule h1 h3 {
+    margin: 3rem auto;
+    text-align: center;
+    font-weight: bold;
+    color: #8a2b06;
+}
+h3{
+    text-align: center;
+    font-weight: bold;
+}
 .card {
     padding: 30px;
     margin-left: 9rem ;
     margin-right: 9rem ;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .schedule select {
+    width: 100px;
+    height: 50px;
     border: solid 3px black ;
     padding: 5px;
     font-weight: bold;
     font-size: 100%;
     margin-left: 50px;
+    margin-top:25px ;
 }
 
 .myButton {

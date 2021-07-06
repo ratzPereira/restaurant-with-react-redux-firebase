@@ -2,10 +2,8 @@ import React from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
-import { useHistory } from "react-router-dom";
 
 function Order(props) {
-  const history = useHistory();
   console.log(props.orderData);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;

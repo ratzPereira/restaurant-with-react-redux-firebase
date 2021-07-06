@@ -6,6 +6,7 @@ import { db } from "../../firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Order from "./Order";
 import { authActions } from "../../store/auth-slice";
+import { plates } from "../../assets/Data";
 
 const Schedule = () => {
   const [order, setOrder] = useState([]);
@@ -28,20 +29,42 @@ const Schedule = () => {
   const [thursdayOption, setThursdayOption] = useState("None");
   const [fridayOption, setFridayOption] = useState("None");
 
+  const [mondayImage, setMondayImage] = useState("");
+  const [tuesdayImage, setTuesdayImage] = useState("");
+  const [wednesdayImage, setWednesdayImage] = useState("");
+  const [thursdayImage, setThursdayImage] = useState("");
+  const [fridayImage, setFridayImage] = useState("");
+
   const getMondayOption = (e) => {
     setMondayOption(e.target.value);
+    const myPlate = findPlate("Monday", e.target.value);
+    setMondayImage(myPlate.img);
   };
   const getTuesdayOption = (e) => {
     setTuesdayOption(e.target.value);
+    const myPlate = findPlate("Tuesday", e.target.value);
+    setTuesdayImage(myPlate.img);
   };
   const getWednesdayOption = (e) => {
     setWednesdayOption(e.target.value);
+    const myPlate = findPlate("Wednesday", e.target.value);
+    setWednesdayImage(myPlate.img);
   };
   const getThursdayOption = (e) => {
     setThursdayOption(e.target.value);
+    const myPlate = findPlate("Thursday", e.target.value);
+    setThursdayImage(myPlate.img);
   };
   const getFridayOption = (e) => {
     setFridayOption(e.target.value);
+    const myPlate = findPlate("Friday", e.target.value);
+    setFridayImage(myPlate.img);
+  };
+
+  const findPlate = (weekDay, value) => {
+    return plates.find(
+      (plate) => plate.Day === weekDay && plate.Type === value
+    );
   };
 
   const clearAllFieldsHandler = () => {
@@ -67,6 +90,7 @@ const Schedule = () => {
       })
       .then(() => {
         dispatch(authActions.setOrder());
+        clearAllFieldsHandler();
       })
       .catch((error) => alert(error.message));
   };
@@ -106,52 +130,57 @@ const Schedule = () => {
         <>
           <div>
             <Card className={classes.card}>
-              Monday:
+              <h3>Monday:</h3>
               <select onChange={getMondayOption}>
                 <option defaultValue="None">None</option>
                 <option value="Meat">Meat</option>
                 <option value="Fish">Fish</option>
               </select>
+              <img src={mondayImage} alt="" />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              Tuesday:
+              <h3>Tuesday:</h3>
               <select onChange={getTuesdayOption}>
                 <option defaultValue="None">None</option>
                 <option value="Meat">Meat</option>
                 <option value="Fish">Fish</option>
               </select>
+              <img src={tuesdayImage} alt="" />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              Wednesday:
+              <h3>Wednesday:</h3>
               <select onChange={getWednesdayOption}>
                 <option defaultValue="None">None</option>
                 <option value="Meat">Meat</option>
                 <option value="Fish">Fish</option>
               </select>
+              <img src={wednesdayImage} alt="" />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              Thursday:
+              <h3>Thursday:</h3>
               <select onChange={getThursdayOption}>
                 <option defaultValue="None">None</option>
                 <option value="Meat">Meat</option>
                 <option value="Fish">Fish</option>
               </select>
+              <img src={thursdayImage} alt="" />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              Friday:
+              <h3>Friday:</h3>
               <select onChange={getFridayOption}>
                 <option defaultValue="None">None</option>
                 <option value="Meat">Meat</option>
                 <option value="Fish">Fish</option>
               </select>
+              <img src={fridayImage} alt="" />
             </Card>
           </div>
         </>
