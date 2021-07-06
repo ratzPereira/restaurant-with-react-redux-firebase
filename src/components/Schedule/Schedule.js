@@ -38,26 +38,46 @@ const Schedule = () => {
   const getMondayOption = (e) => {
     setMondayOption(e.target.value);
     const myPlate = findPlate("Monday", e.target.value);
+    if (!myPlate) {
+      setMondayImage("");
+      return;
+    }
     setMondayImage(myPlate.img);
   };
   const getTuesdayOption = (e) => {
     setTuesdayOption(e.target.value);
     const myPlate = findPlate("Tuesday", e.target.value);
+    if (!myPlate) {
+      setTuesdayImage("");
+      return;
+    }
     setTuesdayImage(myPlate.img);
   };
   const getWednesdayOption = (e) => {
     setWednesdayOption(e.target.value);
     const myPlate = findPlate("Wednesday", e.target.value);
+    if (!myPlate) {
+      setWednesdayImage("");
+      return;
+    }
     setWednesdayImage(myPlate.img);
   };
   const getThursdayOption = (e) => {
     setThursdayOption(e.target.value);
     const myPlate = findPlate("Thursday", e.target.value);
+    if (!myPlate) {
+      setThursdayImage("");
+      return;
+    }
     setThursdayImage(myPlate.img);
   };
   const getFridayOption = (e) => {
     setFridayOption(e.target.value);
     const myPlate = findPlate("Friday", e.target.value);
+    if (!myPlate) {
+      setFridayImage("");
+      return;
+    }
     setFridayImage(myPlate.img);
   };
 
