@@ -2,9 +2,11 @@ import React from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
+import { useHistory } from "react-router-dom";
 
 function Order(props) {
-  console.log(props.orderData.id);
+  const history = useHistory();
+  console.log(props.orderData);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;
@@ -58,7 +60,9 @@ function Order(props) {
     db.collection("orders")
       .doc(props.orderData.id)
       .delete()
-      .then(() => {})
+      .then(() => {
+        props.clearOrderValues();
+      })
       .catch((error) => alert(error.message));
   };
 

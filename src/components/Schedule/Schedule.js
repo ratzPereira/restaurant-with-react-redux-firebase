@@ -44,15 +44,16 @@ const Schedule = () => {
     setFridayOption(e.target.value);
   };
 
+  const clearAllFieldsHandler = () => {
+    setThursdayOption("None");
+    setFridayOption("None");
+    setMondayOption("None");
+    setWednesdayOption("None");
+    setTuesdayOption("None");
+  };
+
   const submitOrderHandler = (e) => {
     e.preventDefault();
-    console.log(
-      mondayOption,
-      thursdayOption,
-      wednesdayOption,
-      fridayOption,
-      tuesdayOption
-    );
 
     db.collection("orders")
       .add({
@@ -164,7 +165,10 @@ const Schedule = () => {
       {!orderOwnerName ? (
         <p>No Order Yet</p>
       ) : (
-        <Order orderData={orderOwnerName} />
+        <Order
+          orderData={orderOwnerName}
+          clearOrderValues={clearAllFieldsHandler}
+        />
       )}
     </div>
   );

@@ -18,6 +18,7 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
     },
+    setOrder(state) {},
   },
 });
 
