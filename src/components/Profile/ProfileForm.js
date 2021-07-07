@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { authActions } from "../../store/auth-slice";
+import Order from "../Schedule/Order";
 
-const ProfileForm = () => {
+const ProfileForm = (props) => {
   const newPasswordInput = useRef();
 
   const dispatch = useDispatch();
@@ -33,21 +34,24 @@ const ProfileForm = () => {
   };
 
   return (
-    <form className={classes.form} onSubmit={changePasswordHandler}>
-      <div className={classes.control}>
-        <label htmlFor="new-password">New Password for {user.email}</label>
-        <input
-          type="password"
-          id="new-password"
-          required
-          minLength={6}
-          ref={newPasswordInput}
-        />
-      </div>
-      <div className={classes.action}>
-        <button>Change Password</button>
-      </div>
-    </form>
+    <div>
+      <form className={classes.form} onSubmit={changePasswordHandler}>
+        <div className={classes.control}>
+          <label htmlFor="new-password">New Password for {user.email}</label>
+          <input
+            type="password"
+            id="new-password"
+            required
+            minLength={6}
+            ref={newPasswordInput}
+          />
+        </div>
+        <div className={classes.action}>
+          <button>Change Password</button>
+        </div>
+      </form>
+      {props.orderOwnerName && <p>You have order</p>}
+    </div>
   );
 };
 

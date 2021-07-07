@@ -8,12 +8,45 @@ import MenuPage from "./pages/MenuPage";
 import AboutPage from "./pages/AboutPage";
 import SchedulePage from "./pages/SchedulePage";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { auth } from "./firebase/firebase";
+import { useEffect, useState } from "react";
+import { auth, db } from "./firebase/firebase";
 import { authActions } from "./store/auth-slice";
 
 function App() {
+  const user = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [order, setOrder] = useState([]);
+
+  //will render the order if user has one
+  useEffect(() => {
+    db.collection("orders").onSnapshot((snapshot) => {
+      setOrder(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+    });
+  }, []);
+
+  const orderData = order.map(
+    ({
+      id,
+      data: {
+        mondayChoice,
+        thursdayChoice,
+        tuesdayChoice,
+        fridayChoice,
+        wednesdayChoice,
+        orderOwner,
+      },
+    }) => {
+      return {
+        id,
+        Monday: mondayChoice,
+        Tuesday: tuesdayChoice,
+        Wednesday: wednesdayChoice,
+        Thursday: thursdayChoice,
+        Friday: fridayChoice,
+        orderOwner,
+      };
+    }
+  );
 
   const dispatch = useDispatch();
 
@@ -34,6 +67,10 @@ function App() {
     });
   }, [dispatch]);
 
+  const orderOwnerName = orderData.find(
+    (orderOwner) => orderOwner.orderOwner == user.email
+  );
+
   return (
     <Layout>
       <Switch>
@@ -45,12 +82,10 @@ function App() {
             <AuthPage />
           </Route>
         )}
-
         <Route path="/profile">
-          {isLoggedIn && <UserProfile />}
+          {isLoggedIn && <UserProfile orderOwnerName={orderOwnerName} />}
           {!isLoggedIn && <Redirect to="auth" />}
         </Route>
-
         <Route path="/menu">
           <MenuPage />
         </Route>
@@ -59,7 +94,7 @@ function App() {
         </Route>
         {isLoggedIn && (
           <Route path="/schedule">
-            <SchedulePage />
+            <SchedulePage orderOwnerName={orderOwnerName} />
           </Route>
         )}
         <Route path="*">

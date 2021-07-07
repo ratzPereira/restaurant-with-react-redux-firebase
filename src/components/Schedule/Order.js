@@ -4,6 +4,7 @@ import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
 
 function Order(props) {
+  console.log(props.orderData);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;
@@ -45,7 +46,11 @@ function Order(props) {
           options.push(
             <div key={index}>
               <p className={classes.name}>{plate.Name}</p>
-              <img src={plate.img} alt={"thisisaoption"} />
+              <img
+                src={plate.img}
+                alt={"thisisaoption"}
+                className={classes.image}
+              />
               <p>Price: {plate.Price}$</p>
             </div>
           );

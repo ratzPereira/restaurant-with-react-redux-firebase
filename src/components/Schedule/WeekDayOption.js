@@ -2,7 +2,6 @@ import classes from "./WeekDayOption.module.css";
 import Card from "../UI/Card";
 
 const WeekDayOption = (props) => {
-  console.log(props.plate);
   return (
     <div>
       <p className={classes.name}>{props.plate.Name ? props.plate.Name : ""}</p>
