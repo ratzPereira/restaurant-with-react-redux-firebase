@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
 
 function Order(props) {
-  console.log(props.orderData);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;
   const thursday = props.orderData.Thursday;
   const friday = props.orderData.Friday;
+
+  const [isSure, setSure] = useState(false);
 
   const choices = [
     {
@@ -59,14 +60,24 @@ function Order(props) {
     });
 
   const deleteOrderHandler = () => {
-    db.collection("orders")
-      .doc(props.orderData.id)
-      .delete()
-      .then(() => {
-        props.clearOrderValues();
-        props.clearImageFields();
-      })
-      .catch((error) => alert(error.message));
+    if (isSure) {
+      db.collection("orders")
+        .doc(props.orderData.id)
+        .delete()
+        .then(() => {
+          props.clearOrderValues();
+          props.clearImageFields();
+        })
+        .catch((error) => alert(error.message));
+    }
+  };
+
+  const safeDelete = () => {
+    setSure(true);
+  };
+
+  const notSafeDelete = () => {
+    setSure(false);
   };
 
   return (
@@ -74,9 +85,22 @@ function Order(props) {
       <div className={classes.order}>{options}</div>
       <div>
         <p className={classes.total}>Your grand Total: {total}$</p>
-        <button onClick={deleteOrderHandler} className={classes.btn}>
-          Delete order!
-        </button>
+        {!isSure && (
+          <button onClick={safeDelete} className={classes.btn}>
+            Delete order!
+          </button>
+        )}
+        {isSure && (
+          <>
+            <button onClick={deleteOrderHandler} className={classes.btn}>
+              Yes
+            </button>
+
+            <button onClick={notSafeDelete} className={classes.btnNo}>
+              No
+            </button>
+          </>
+        )}
       </div>
     </>
   );
