@@ -33,6 +33,10 @@ const ProfileForm = (props) => {
       .catch((error) => alert(error.message));
   };
 
+  const redirectToOrderHandler = () => {
+    history.replace("/schedule");
+  };
+
   return (
     <div>
       <form className={classes.form} onSubmit={changePasswordHandler}>
@@ -50,7 +54,13 @@ const ProfileForm = (props) => {
           <button>Change Password</button>
         </div>
       </form>
-      {props.orderOwnerName && <p>You have order</p>}
+      {props.orderOwnerName && (
+        <div className={classes.action}>
+          <p className={classes.orderTitle}>You have one order:</p>
+          <p className={classes.orderInfo}>Click below to see your order</p>
+          <button onClick={redirectToOrderHandler}>View Order</button>
+        </div>
+      )}
     </div>
   );
 };

@@ -25,7 +25,17 @@
   padding: 0.25rem;
   background-color: #f7f0fa;
 }
+.orderTitle{
+  margin-top: 59px;
+  font-weight: bold;
+  font-size: x-large;
 
+}
+.orderInfo {
+color: white;
+  font-weight: bold;
+  border-bottom: solid green 2px;
+}
 .action {
   margin-top: 1.5rem;
 }
