@@ -11,9 +11,6 @@ import WeekDayOption from "./WeekDayOption";
 
 const Schedule = () => {
   const [order, setOrder] = useState([]);
-
-  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -65,6 +62,16 @@ const Schedule = () => {
   };
 
   const findPlatesForDay = (weekday, type) => {
+    if (type === "None") {
+      return {
+        Day: "",
+        Name: "",
+        Price: "",
+        Type: "",
+        id: "",
+        img: "",
+      };
+    }
     return plates.find(
       (plates) => plates.Day === weekday && plates.Type === type
     );
@@ -78,14 +85,14 @@ const Schedule = () => {
         orderOwner: user.email,
         mondayChoice: mondayOption.Type ? mondayOption.Type : "None",
         tuesdayChoice: tuesdayOption.Type ? tuesdayOption.Type : "None",
-        wednesdayChoice: wednesdayOption.Type ? wednesdayOption : "None",
+        wednesdayChoice: wednesdayOption.Type ? wednesdayOption.Type : "None",
         thursdayChoice: thursdayOption.Type ? thursdayOption.Type : "None",
         fridayChoice: fridayOption.Type ? fridayOption.Type : "None",
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
         dispatch(authActions.setOrder());
-        // clearAllFieldsHandler();
+        clearAllFieldsHandler();
       })
       .catch((error) => alert(error.message));
   };
