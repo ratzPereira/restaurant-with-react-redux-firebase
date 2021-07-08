@@ -68,7 +68,7 @@ function App() {
   }, [dispatch]);
 
   const orderOwnerName = orderData.find(
-    (orderOwner) => orderOwner.orderOwner == user.email
+    (orderOwner) => orderOwner.orderOwner == user?.email
   );
 
   return (

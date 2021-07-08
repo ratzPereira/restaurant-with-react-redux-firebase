@@ -74,6 +74,19 @@ const Schedule = (props) => {
   const submitOrderHandler = (e) => {
     e.preventDefault();
 
+    console.log(mondayOption.Type);
+
+    if (
+      !mondayOption.Type &&
+      !thursdayOption.Type &&
+      !wednesdayOption.Type &&
+      !tuesdayOption.Type &&
+      !fridayOption.Type
+    ) {
+      alert("Choose at least one option");
+      return;
+    }
+
     db.collection("orders")
       .add({
         orderOwner: user.email,
