@@ -1,0 +1,41 @@
+.card {
+    padding: 30px;
+    margin-left: 9rem ;
+    margin-right: 9rem ;
+    margin-top: 20px;
+
+}
+
+ select {
+    width: 100px;
+    height: 50px;
+    border: solid 3px black ;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 100%;
+    margin-left: 50px;
+    margin-top:25px ;
+}
+
+.schedule {
+    margin: 3rem auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+ img {
+    height: 120px;
+
+}
+
+ h1 h3 {
+    margin: 3rem auto;
+    text-align: center;
+    font-weight: bold;
+    color: #8a2b06;
+}
+h3{
+    text-align: center;
+    font-weight: bold;
+}

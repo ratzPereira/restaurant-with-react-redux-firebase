@@ -8,8 +8,8 @@ import MenuPage from "./pages/MenuPage";
 import AboutPage from "./pages/AboutPage";
 import SchedulePage from "./pages/SchedulePage";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { auth, db } from "./firebase/firebase";
+import { useEffect } from "react";
+import { auth } from "./firebase/firebase";
 import { authActions } from "./store/auth-slice";
 
 function App() {

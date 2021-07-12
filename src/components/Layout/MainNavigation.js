@@ -11,7 +11,7 @@ const MainNavigation = () => {
 
   const history = useHistory();
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
 
   const logoutHandler = (event) => {
     event.preventDefault();
@@ -34,23 +34,22 @@ const MainNavigation = () => {
           <li>
             <Link to="/menu">Menu</Link>
           </li>
-          {isLoggedIn && (
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          )}
-          {isLoggedIn && (
+
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+
+          {user && (
             <li>
               <Link to="/schedule">Schedule</Link>
             </li>
           )}
-          {!isLoggedIn && (
+          {!user && (
             <li>
               <Link to="/auth">Login</Link>
             </li>
           )}
-
-          {isLoggedIn && (
+          {user && (
             <li>
               <button onClick={logoutHandler}>Logout</button>
             </li>

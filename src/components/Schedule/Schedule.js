@@ -8,6 +8,7 @@ import Order from "./Order";
 import { authActions } from "../../store/auth-slice";
 import { plates } from "../../assets/Data";
 import WeekDayOption from "./WeekDayOption";
+import Option from "./Option";
 
 const Schedule = () => {
   const user = useSelector((state) => state.auth.user);
@@ -148,56 +149,31 @@ const Schedule = () => {
         <>
           <div>
             <Card className={classes.card}>
-              <h3>Monday:</h3>
-              <select onChange={getMondayOption}>
-                <option defaultValue="None">None</option>
-                <option value="Meat">Meat</option>
-                <option value="Fish">Fish</option>
-              </select>
+              <Option option={getMondayOption}>Monday:</Option>
               <WeekDayOption plate={mondayOption} />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              <h3>Tuesday:</h3>
-              <select onChange={getTuesdayOption}>
-                <option defaultValue="None">None</option>
-                <option value="Meat">Meat</option>
-                <option value="Fish">Fish</option>
-              </select>
+              <Option option={getTuesdayOption}>Tuesday:</Option>
               <WeekDayOption plate={tuesdayOption} />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              <h3>Wednesday:</h3>
-              <select onChange={getWednesdayOption}>
-                <option defaultValue="None">None</option>
-                <option value="Meat">Meat</option>
-                <option value="Fish">Fish</option>
-              </select>
+              <Option option={getWednesdayOption}>Wednesday:</Option>
               <WeekDayOption plate={wednesdayOption} />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              <h3>Thursday:</h3>
-              <select onChange={getThursdayOption}>
-                <option defaultValue="None">None</option>
-                <option value="Meat">Meat</option>
-                <option value="Fish">Fish</option>
-              </select>
+              <Option option={getThursdayOption}>Thursday:</Option>
               <WeekDayOption plate={thursdayOption} />
             </Card>
           </div>
           <div>
             <Card className={classes.card}>
-              <h3>Friday:</h3>
-              <select onChange={getFridayOption}>
-                <option defaultValue="None">None</option>
-                <option value="Meat">Meat</option>
-                <option value="Fish">Fish</option>
-              </select>
+              <Option option={getFridayOption}>Friday:</Option>
               <WeekDayOption plate={fridayOption} />
             </Card>
           </div>

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { authActions } from "../../store/auth-slice";
-import Order from "../Schedule/Order";
 
 const ProfileForm = (props) => {
   const newPasswordInput = useRef();
