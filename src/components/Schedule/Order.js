@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { plates } from "../../assets/Data";
 import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
+import { authActions } from "../../store/auth-slice";
+import { useDispatch } from "react-redux";
 
 function Order(props) {
   console.log(props);
@@ -12,6 +14,8 @@ function Order(props) {
   const friday = props.orderData.Friday;
 
   const [isSure, setSure] = useState(false);
+
+  const dispatch = useDispatch();
 
   const choices = [
     {
@@ -68,6 +72,7 @@ function Order(props) {
         .then(() => {
           props.clearOrderValues();
           props.clearImageFields();
+          dispatch(authActions.hasNoOrderHandler());
         })
         .catch((error) => alert(error.message));
     }

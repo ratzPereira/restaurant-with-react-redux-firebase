@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
   user: null,
+  hasOrder: false,
 };
 
 const authSlice = createSlice({
@@ -18,6 +19,12 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     },
     setOrder(state) {},
+    hasOrderHandler(state) {
+      state.hasOrder = true;
+    },
+    hasNoOrderHandler(state) {
+      state.hasOrder = false;
+    },
   },
 });
 

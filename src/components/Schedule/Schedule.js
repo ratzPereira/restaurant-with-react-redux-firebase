@@ -11,6 +11,7 @@ import WeekDayOption from "./WeekDayOption";
 
 const Schedule = () => {
   const user = useSelector((state) => state.auth.user);
+  const userHasOrder = useSelector((state) => state.auth.hasOrder);
 
   const [order, setOrder] = useState([]);
 
@@ -107,6 +108,7 @@ const Schedule = () => {
       .then(() => {
         dispatch(authActions.setOrder());
         clearAllFieldsHandler();
+        dispatch(authActions.hasOrderHandler());
       })
       .catch((error) => alert(error.message));
   };
