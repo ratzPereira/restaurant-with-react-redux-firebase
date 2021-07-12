@@ -9,12 +9,19 @@ import { authActions } from "../../store/auth-slice";
 import { plates } from "../../assets/Data";
 import WeekDayOption from "./WeekDayOption";
 
-const Schedule = (props) => {
+const Schedule = () => {
   const user = useSelector((state) => state.auth.user);
 
-  const dispatch = useDispatch();
+  const [order, setOrder] = useState([]);
 
-  console.log(props.orderOwnerName);
+  //will render the order if user has one
+  useEffect(() => {
+    db.collection("orders").onSnapshot((snapshot) => {
+      setOrder(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+    });
+  }, []);
+
+  const dispatch = useDispatch();
 
   const [mondayOption, setMondayOption] = useState([]);
   const [tuesdayOption, setTuesdayOption] = useState([]);
@@ -104,10 +111,38 @@ const Schedule = (props) => {
       .catch((error) => alert(error.message));
   };
 
+  const orderData = order.map(
+    ({
+      id,
+      data: {
+        mondayChoice,
+        thursdayChoice,
+        tuesdayChoice,
+        fridayChoice,
+        wednesdayChoice,
+        orderOwner,
+      },
+    }) => {
+      return {
+        id,
+        Monday: mondayChoice,
+        Tuesday: tuesdayChoice,
+        Wednesday: wednesdayChoice,
+        Thursday: thursdayChoice,
+        Friday: fridayChoice,
+        orderOwner,
+      };
+    }
+  );
+
+  const orderOwnerName = orderData.find(
+    (orderOwner) => orderOwner.orderOwner == user.email
+  );
+
   return (
     <div className={classes.schedule}>
       <h1>Schedule your meals</h1>
-      {!props.orderOwnerName && (
+      {!orderOwnerName && (
         <>
           <div>
             <Card className={classes.card}>
@@ -166,16 +201,16 @@ const Schedule = (props) => {
           </div>
         </>
       )}
-      {!props.orderOwnerName && (
+      {!orderOwnerName && (
         <button onClick={submitOrderHandler} className={classes.myButton}>
           Order Now!
         </button>
       )}
-      {!props.orderOwnerName ? (
+      {!orderOwnerName ? (
         <p>No Order Yet</p>
       ) : (
         <Order
-          orderData={props.orderOwnerName}
+          orderData={orderOwnerName}
           clearOrderValues={clearAllFieldsHandler}
           clearImageFields={clearAllImagesHandler}
         />

@@ -4,6 +4,7 @@ import classes from "./Order.module.css";
 import { db } from "../../firebase/firebase";
 
 function Order(props) {
+  console.log(props);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;

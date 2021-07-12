@@ -1,7 +1,7 @@
 import Schedule from "../components/Schedule/Schedule";
 
 const SchedulePage = (props) => {
-  return <Schedule orderOwnerName={props.orderOwnerName} />;
+  return <Schedule />;
 };
 
 export default SchedulePage;

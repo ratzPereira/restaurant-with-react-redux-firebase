@@ -14,39 +14,6 @@ import { authActions } from "./store/auth-slice";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const [order, setOrder] = useState([]);
-
-  //will render the order if user has one
-  useEffect(() => {
-    db.collection("orders").onSnapshot((snapshot) => {
-      setOrder(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
-    });
-  }, []);
-
-  const orderData = order.map(
-    ({
-      id,
-      data: {
-        mondayChoice,
-        thursdayChoice,
-        tuesdayChoice,
-        fridayChoice,
-        wednesdayChoice,
-        orderOwner,
-      },
-    }) => {
-      return {
-        id,
-        Monday: mondayChoice,
-        Tuesday: tuesdayChoice,
-        Wednesday: wednesdayChoice,
-        Thursday: thursdayChoice,
-        Friday: fridayChoice,
-        orderOwner,
-      };
-    }
-  );
 
   const dispatch = useDispatch();
 
@@ -67,24 +34,20 @@ function App() {
     });
   }, [dispatch]);
 
-  const orderOwnerName = orderData.find(
-    (orderOwner) => orderOwner.orderOwner == user?.email
-  );
-
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
           <HomePage />
         </Route>
-        {!isLoggedIn && (
+        {!user && (
           <Route path="/auth">
             <AuthPage />
           </Route>
         )}
         <Route path="/profile">
-          {isLoggedIn && <UserProfile orderOwnerName={orderOwnerName} />}
-          {!isLoggedIn && <Redirect to="auth" />}
+          {user && <UserProfile />}
+          {!user && <Redirect to="auth" />}
         </Route>
         <Route path="/menu">
           <MenuPage />
@@ -92,9 +55,9 @@ function App() {
         <Route path="/about">
           <AboutPage />
         </Route>
-        {isLoggedIn && (
+        {user && (
           <Route path="/schedule">
-            <SchedulePage orderOwnerName={orderOwnerName} />
+            <SchedulePage />
           </Route>
         )}
         <Route path="*">

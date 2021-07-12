@@ -54,13 +54,13 @@ const ProfileForm = (props) => {
           <button>Change Password</button>
         </div>
       </form>
-      {props.orderOwnerName && (
-        <div className={classes.action}>
-          <p className={classes.orderTitle}>You have one order:</p>
-          <p className={classes.orderInfo}>Click below to see your order</p>
-          <button onClick={redirectToOrderHandler}>View Order</button>
-        </div>
-      )}
+      {/*{props.orderOwnerName && (*/}
+      {/*  <div className={classes.action}>*/}
+      {/*    <p className={classes.orderTitle}>You have one order:</p>*/}
+      {/*    <p className={classes.orderInfo}>Click below to see your order</p>*/}
+      {/*    <button onClick={redirectToOrderHandler}>View Order</button>*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </div>
   );
 };
