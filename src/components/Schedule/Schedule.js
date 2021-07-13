@@ -92,8 +92,6 @@ const Schedule = () => {
   const submitOrderHandler = (e) => {
     e.preventDefault();
 
-    console.log(mondayOption.Type);
-
     if (
       !mondayOption.Type &&
       !thursdayOption.Type &&
