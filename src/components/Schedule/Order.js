@@ -6,7 +6,6 @@ import { authActions } from "../../store/auth-slice";
 import { useDispatch } from "react-redux";
 
 function Order(props) {
-  console.log(props);
   const monday = props.orderData.Monday;
   const tuesday = props.orderData.Tuesday;
   const wednesday = props.orderData.Wednesday;

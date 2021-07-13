@@ -12,7 +12,6 @@ import Option from "./Option";
 
 const Schedule = () => {
   const user = useSelector((state) => state.auth.user);
-  const userHasOrder = useSelector((state) => state.auth.hasOrder);
 
   const [order, setOrder] = useState([]);
 

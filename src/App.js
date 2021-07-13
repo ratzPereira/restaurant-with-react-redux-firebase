@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { auth } from "./firebase/firebase";
 import { authActions } from "./store/auth-slice";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -60,8 +61,11 @@ function App() {
             <SchedulePage />
           </Route>
         )}
+        {/*<Route path="*">*/}
+        {/*  <Redirect to="/" />*/}
+        {/*</Route>*/}
         <Route path="*">
-          <Redirect to="/" />
+          <NotFound />
         </Route>
       </Switch>
     </Layout>

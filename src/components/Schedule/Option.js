@@ -3,6 +3,7 @@ import classes from "./Option.module.css";
 import React from "react";
 
 const MyComponent = (props) => {
+  console.log(props);
   return (
     <div className={classes.card}>
       <h3>{props.children}</h3>
