@@ -9,9 +9,12 @@ import { authActions } from "../../store/auth-slice";
 import { plates } from "../../assets/Data";
 import WeekDayOption from "./WeekDayOption";
 import Option from "./Option";
+import { useHistory } from "react-router-dom";
+import NotAuth from "../UI/NotAuth";
 
 const Schedule = () => {
   const user = useSelector((state) => state.auth.user);
+  const history = useHistory();
 
   const [order, setOrder] = useState([]);
 
@@ -29,6 +32,13 @@ const Schedule = () => {
   const [wednesdayOption, setWednesdayOption] = useState([]);
   const [thursdayOption, setThursdayOption] = useState([]);
   const [fridayOption, setFridayOption] = useState([]);
+
+  if (!user) {
+    setTimeout(() => {
+      history.replace("/auth");
+    }, 3000);
+    return <NotAuth />;
+  }
 
   const getMondayOption = (e) => {
     setMondayOption(findPlatesForDay("Monday", e.target.value));

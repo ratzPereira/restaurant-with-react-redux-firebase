@@ -19,21 +19,19 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
-      if (userAuth) {
-        //user is logged in
-        dispatch(
-          authActions.login({
-            email: userAuth.email,
-            uid: userAuth.uid,
-          })
-        );
-      } else {
-        //user is logged out
-        dispatch(authActions.logout());
-      }
-    });
-  }, [dispatch]);
+    !user &&
+      auth.onAuthStateChanged((userAuth) => {
+        if (userAuth) {
+          //user is logged in
+          dispatch(
+            authActions.login({
+              email: userAuth.email,
+              uid: userAuth.uid,
+            })
+          );
+        }
+      });
+  }, []);
 
   return (
     <Layout>
@@ -41,14 +39,11 @@ function App() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        {!user && (
-          <Route path="/auth">
-            <AuthPage />
-          </Route>
-        )}
+        <Route path="/auth">
+          <AuthPage />
+        </Route>
         <Route path="/profile">
-          {user && <UserProfile />}
-          {!user && <Redirect to="auth" />}
+          <UserProfile />
         </Route>
         <Route path="/menu">
           <MenuPage />
@@ -56,14 +51,9 @@ function App() {
         <Route path="/about">
           <AboutPage />
         </Route>
-        {user && (
-          <Route path="/schedule">
-            <SchedulePage />
-          </Route>
-        )}
-        {/*<Route path="*">*/}
-        {/*  <Redirect to="/" />*/}
-        {/*</Route>*/}
+        <Route path="/schedule">
+          <SchedulePage />
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>

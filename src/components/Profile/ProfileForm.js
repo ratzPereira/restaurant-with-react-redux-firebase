@@ -11,10 +11,12 @@ const ProfileForm = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const userOrder = useSelector((state) => state.auth.hasOrder);
-
-  console.log(userOrder);
-
   const history = useHistory();
+
+  if (!user) {
+    history.replace("/auth");
+    return <p>Restricted area</p>;
+  }
 
   const changePasswordHandler = (event) => {
     event.preventDefault();

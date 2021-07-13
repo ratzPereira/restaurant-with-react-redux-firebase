@@ -1,17 +1,25 @@
 import { useState, useRef } from "react";
 import classes from "./AuthForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import { auth } from "../../firebase/firebase";
+import { useHistory } from "react-router-dom";
 
 const AuthForm = () => {
+  const user = useSelector((state) => state.auth.user);
+
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const history = useHistory();
+
+  if (user) {
+    history.replace("/");
+    return null;
+  }
 
   const switchAuthModeHandler = async () => {
     setIsLogin((prevState) => !prevState);
